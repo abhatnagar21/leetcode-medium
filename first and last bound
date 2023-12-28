@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        // Use a single function to find both first and last occurrences
+        int left = findBound(nums, target, true); // Find first occurrence
+        int right = findBound(nums, target, false); // Find last occurrence
+        return {left, right};
+    }
+
+private:
+    int findBound(vector<int>& nums, int target, bool findFirst) {
+        int left = 0, right = nums.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                // Update bound based on whether we're finding first or last occurrence
+                if (findFirst) { 
+                    right = mid - 1; // Search for potentially earlier occurrence
+                } else {
+                    left = mid + 1; // Search for potentially later occurrence
+                }
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // Return appropriate bound if target was found, otherwise -1
+        return (findFirst && left < nums.size() && nums[left] == target) ? left :
+                (!findFirst && right >= 0 && nums[right] == target) ? right : -1;
+    }
+};
