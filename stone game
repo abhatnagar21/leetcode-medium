@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool stoneGame(std::vector<int>& piles) {
+        /*int i = 0, j = nums.size() - 1;
+        int chance = 0;
+        int aliceScore = 0, bobScore = 0;
+
+        while (j - i >= 1) {
+            chance++;
+
+            if (chance % 2 != 0) { // Alice's turn
+                if (nums[i] >= nums[j]) {
+                    aliceScore += nums[i];
+                    i++;
+                } else {
+                    aliceScore += nums[j];
+                    j--;
+                }
+            } else { // Bob's turn
+                if (nums[i] >= nums[j]) {
+                    bobScore += nums[i];
+                    i++;
+                } else {
+                    bobScore += nums[j];
+                    j--;
+                }
+            }
+        }
+
+        return aliceScore > bobScore;*/
+        int n = piles.size();
+        vector<int> dp(n/2+1,0);
+
+        for (int i = 1;i<=n/2;++i) {
+            dp[i] =dp[i-1]+max(piles[i]-piles[n-i],piles[n-i]-piles[i]);
+        }
+return dp[n/2]>0;
+
+        
+    }
+};
