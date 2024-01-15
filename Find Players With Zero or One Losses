@@ -1,0 +1,69 @@
+Find Players With Zero or One Losses
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        /*set<int> w, l;
+        unordered_map<int, int> mp;
+        vector<int> v1, v2;
+        vector<vector<int>> ans;  // Fix: Corrected the type of 'ans'
+
+        for (auto x : matches) {
+            w.insert(x[0]);
+            l.insert(x[1]);  // Fix: Corrected the index to x[1]
+            mp[x[0]]++;
+        }
+
+        for (auto c : w) {
+            if (mp.find(c) == mp.end()) {
+                v1.push_back(c);
+            }
+        }
+
+        for (auto v : l) {
+            if (mp[v] == 1) {
+                v2.push_back(v);
+            }
+        }
+
+        ans.push_back(v1);  // Fix: Corrected the order of push_back
+        ans.push_back(v2);  // Fix: Corrected the order of push_back
+        return ans;
+    }*/
+    set<int> winnerList, looserList;
+        map<int, int> loosemp;
+        for (auto match : matches){
+            int winner = match[0];
+            int looser = match[1];
+            loosemp[looser]++;
+            winnerList.insert(winner);
+            looserList.insert(looser);
+        }
+        
+        vector<vector<int>> ans;
+        vector<int> ans1;
+        for (auto x : looserList){
+            if (winnerList.find(x) != winnerList.end()){
+                winnerList.erase(x);
+            }
+        }
+        for (auto x : winnerList){
+            ans1.push_back(x);
+        }
+        
+        vector<int> ans2;
+        for (auto x : loosemp){
+            if (x.second == 1){
+                ans2.push_back(x.first);
+            }
+        }
+        
+        ans.push_back(ans1);
+        ans.push_back(ans2);
+        return ans;
+    }
+    
+    
+
+};
+
+
