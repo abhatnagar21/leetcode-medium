@@ -1,0 +1,21 @@
+class StockSpanner {
+public:
+    std::stack<std::pair<int, int>> s;
+
+    StockSpanner() {}
+
+    int next(int price) {
+        int res = 1; // Initialize the result to 1 for the current day
+
+        // Pop elements from the stack that have smaller or equal prices
+        while (!s.empty() && s.top().first <= price) {
+            res += s.top().second;
+            s.pop();
+        }
+
+        // Push the current price and its corresponding span onto the stack
+        s.push({price, res});
+
+        return res;
+    }
+};
