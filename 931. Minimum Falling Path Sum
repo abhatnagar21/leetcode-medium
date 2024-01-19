@@ -1,0 +1,38 @@
+class Solution {
+public:
+    //int minFallingPathSum(vector<vector<int>>& matrix) {
+        /*int m = matrix.size(), n = matrix[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+
+        // Initialize the first row with the matrix values
+        for (int j = 0; j < n; j++) {
+            dp[0][j] = matrix[0][j];
+        }
+
+        // Iterate from the second row onwards
+        for (int i = 1; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int minAbove = INT_MAX;
+                // Check the three possible positions above the current element
+                if (j > 0) {
+                    minAbove = min(minAbove, dp[i - 1][j - 1]);
+                }
+                minAbove = min(minAbove, dp[i - 1][j]);
+                if (j < n - 1) {
+                    minAbove = min(minAbove, dp[i - 1][j + 1]);
+                }
+                // Add the minimum value above to the current matrix value
+                dp[i][j] = minAbove + matrix[i][j];
+            }
+        }
+
+        // Find the minimum sum in the last row
+        int minSum = INT_MAX;
+        for (int j = 0; j < n; j++) {
+            minSum = min(minSum, dp[m - 1][j]);
+        }
+
+        return minSum;*/
+        
+        }
+};
